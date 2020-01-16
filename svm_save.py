@@ -9,7 +9,7 @@ import pickle
 
 class SVM_fit : 
     def __init__(self) :
-        self.PATH = '/Users/jeonminwoo/Downloads/facenet-mtcnn-svm/'
+        self.PATH = '/test/'
         self.data = load(self.PATH+'all-other-embeddings_hangul.npz')
         self.trainX, self.trainy = self.data['arr_0'], self.data['arr_1']
 
@@ -30,7 +30,7 @@ class SVM_fit :
             "out_encoder":self.out_encoder,
             "svm":self.model
         }
-        model_path = self.PATH+"svm_test.pkl"
+        model_path = self.PATH+"svm_docker_test.pkl"
         f = open(model_path, "wb")
         f.write(pickle.dumps(face_model))
         f.close()

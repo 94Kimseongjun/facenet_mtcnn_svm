@@ -1,0 +1,25 @@
+FROM continuumio/miniconda3 
+MAINTAINER Seongjun Kim<s.kim@xiilab.com>
+
+RUN conda update -n base conga
+RUN conda create -n py362 python=3.6.2
+SHELL ["conda","run","-n","py362","/bin/bash","-c"]
+RUN yes | pip install tensorflow-gpu==1.15.0
+RUN yes | pip install keras==2.3.1
+RUN yes | pip install mtcnn
+RUN yes | pip install matplotlib
+RUN yes | pip install tqdm
+RUN yes | pip install sklearn
+RUN yes | pip install ipywidgets
+RUN yes | pip install pillow
+RUN yes | pip install pandas
+
+
+WORKDIR /home
+
+ENTRYPOINT ["conda activate py362"]
+
+
+
+
+

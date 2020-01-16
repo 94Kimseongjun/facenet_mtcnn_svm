@@ -1,0 +1,15 @@
+FROM continuumio/miniconda3 
+MAINTAINER Seongjun Kim<s.kim@xiilab.com>
+
+RUN conda update -n base conda
+RUN conda create -n py362 python=3.6.2
+SHELL ["conda","run","-n","py362","/bin/bash","-c"]
+RUN pip install --yes tensorflow==1.15.0
+RUN pip install keras==2.3.1
+RUN pip install mtcnn
+RUN pip install pillow
+RUN pip install matplotlib
+RUN pip install tqdm
+RUN pip install sklearn
+RUN pip install ipywidgets
+

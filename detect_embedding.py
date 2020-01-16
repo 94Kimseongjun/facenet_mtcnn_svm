@@ -17,7 +17,7 @@ class FaceAnalysis:
         config.gpu_options.per_process_gpu_memory_fraction = 0.8
         set_session(tf.Session(config=config))
         self.detector = MTCNN()
-        self.pre_train_model = load_model('/Users/jeonminwoo/Downloads/facenet-mtcnn-svm/facenet_keras.h5')
+        self.pre_train_model = load_model('/test/facenet_keras.h5')
         global graph
         graph = tf.get_default_graph()
         print("load OK")

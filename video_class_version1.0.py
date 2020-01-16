@@ -33,7 +33,7 @@ class CSV_write : # pandas 를 이용하여, csv를 저장합니다.
 
 class VIDEO_face_recognition : 
     def __init__(self, video_file, save_file = 'save', percentage = 88, frame_per_detect = 30):
-        self.PATH = '/Users/jeonminwoo/Downloads/facenet-mtcnn-svm/'
+        self.PATH = '/test/'
         self.font = ImageFont.truetype(self.PATH+'NanumBarunGothic.ttf',20)
         self.video_file = video_file
         self.percentage = percentage # svm 분류 확률
@@ -41,7 +41,7 @@ class VIDEO_face_recognition :
         self.CSV = CSV_write(self.video_file, self.PATH)
         self.save_file = save_file
         try:
-            with open(self.PATH+'svm_test.pkl', 'rb') as handle:
+            with open(self.PATH+'svm_docker_test.pkl', 'rb') as handle:
                 face_model = pickle.load(handle)
         except:
             print('svm 모델 불러오기 실패')
@@ -95,7 +95,8 @@ class VIDEO_face_recognition :
             ret, image = cap.read()
 
             if ret:
-
+                if tqdm > 1000 :
+                    break
                 if(int(cap.get(1)%self.frame_per_detect == 0 or cap.get(1) == 1.0)) : # 시작시 한 번 실행, 그 후 %d 프레임마다 얼굴 추출, 비교
                     # CSV 시간 저장을 위해 시간 계산
                     frame_num = cap.get(cv2.CAP_PROP_POS_FRAMES)
@@ -122,7 +123,7 @@ class VIDEO_face_recognition :
                         draw.text((bound_box_start[i][0], bound_box_end[i][1]), name_list[i]+ ' %.1f' % class_probability_list[i], font=self.font, fill=(0,255,255,0))
                         image = array(img_pil)
                         box_num += 1
-                cv2.imshow("test",image)
+                #cv2.imshow("test",image)
                 out.write(image)
 
                 if(cv2.waitKey(30) & 0xFF == ord('q')):
@@ -213,7 +214,7 @@ if __name__ == '__main__':
 # default 값이 있는 argument : save_file (저장할 파일 이름), percentage (svm 확률), frame_per_detect (몇 프레임마다 detect 를 할건지)
 
     startTime = time.time()
-    video_face_recognition = VIDEO_face_recognition(video_file='mun_kim_xi_peng-test.mp4', save_file= '테스트.mp4', frame_per_detect=100)
+    video_face_recognition = VIDEO_face_recognition(video_file='mun_kim_xi_peng-test.mp4', save_file= '테스트', frame_per_detect=100)
     endTime = time.time() - startTime
     print("프로그램 실행시간 :", endTime)
 
